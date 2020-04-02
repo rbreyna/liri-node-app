@@ -1,7 +1,9 @@
 require("dotenv").config();
+
 var axios = require("axios");
 var keys = require("./keys.js");
-//var spotify = new spotify(keys.spotify);
+var Spotify = require('node-spotify-api');
+var spotify = new Spotify(keys.spotify);
 
 var action = process.argv[2];
 var argument = process.argv[3];
@@ -22,11 +24,23 @@ switch(action){
 }
 
 function concert(band){
+    request("https://rest.bandsintown.com/artists/" + band + "/events?app_id=codingbootcamp", function (error, response, body) {
 
+    });
 }
 
 function song(name){
-
+    spotify
+        .search({type: 'track', query: name, limit: 1})
+        .then(function(response){
+            console.log("\nArtist: " + response.tracks.items[0].artists[0].name);
+            console.log("Song: " + name);
+            console.log("Album: " + response.tracks.items[0].album.name +"\n");
+            console.log("Spotify Link: " + response.tracks.items[0].external_urls.spotify);
+        })
+        .catch(function(err){
+            console.log(err);
+        })
 }
 
 function movie(title){
