@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+var fs = require("fs");
 var axios = require("axios");
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
@@ -48,6 +49,18 @@ function movie(title){
 }
 
 function read(){
+    fs.readFile("random.txt", "utf8", function(error, data) {
 
+        if (error) {
+          return console.log(error);
+        }
+
+        var array = data.split(",");
+
+        action = array[0];
+        argument = array[1];
+
+        song(argument);
+    });
 }
 
