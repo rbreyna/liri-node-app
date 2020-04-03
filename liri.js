@@ -3,6 +3,7 @@ require("dotenv").config();
 var fs = require("fs");
 var axios = require("axios");
 var keys = require("./keys.js");
+var moment = require("moment");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 
@@ -25,8 +26,17 @@ switch(action){
 }
 
 function concert(band){
-    request("https://rest.bandsintown.com/artists/" + band + "/events?app_id=codingbootcamp", function (error, response, body) {
 
+    axios.get("https://rest.bandsintown.com/artists/" + band + "/events?app_id=codingbootcamp")
+    .then(function(response){
+        var newDate = moment(response.data[0].datetime);
+   
+        console.log(response.data[0].datetime);
+        console.log("\n"+newDate.format("MM/DD/YYYY"))
+        console.log(newDate.format("h:mm A"))
+    })
+    .catch(function(err){
+        console.log(err.message)
     });
 }
 
@@ -45,7 +55,10 @@ function song(name){
 }
 
 function movie(title){
+    request("http://www.omdbapi.com/?i=tt3896198&apikey=222c6746&" + title, function (error, response, body) {
 
+    });
+    
 }
 
 function read(){
