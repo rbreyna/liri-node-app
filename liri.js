@@ -65,7 +65,7 @@ function song(name){
             console.log("\nArtist: " + response.tracks.items[0].artists[0].name);
             console.log("Song: " + name);
             console.log("Album: " + response.tracks.items[0].album.name +"\n");
-            console.log("Spotify Link: " + response.tracks.items[0].external_urls.spotify);
+            console.log("Spotify Link: " + response.tracks.items[0].external_urls.spotify +"\n");
         })
         .catch(function(err){
             console.log(err);
@@ -74,9 +74,21 @@ function song(name){
 
 function movie(title){
 
-    axios.get("http://www.omdbapi.com/?i=tt3896198&apikey=222c6746&" + title)
-    .then(function(response){})
-    .catch(function(err){})
+    axios.get("http://www.omdbapi.com/?i=tt3896198&apikey=222c6746&t=" + title)
+    .then(function(response){
+        console.log("\nMovie Info for: " + title +"\n");
+        console.log("Title: " + response.data.Title);
+        console.log("Year Released: "  +response.data.Year);
+        console.log("IMDB Rating: " + response.data.imdbRating);
+        console.log("Rotten Tomatoes Rating: " + response.data.Ratings[1].Value); 
+        console.log("Country: " + response.data.Country);
+        console.log("Language: " + response.data.Language);
+        console.log("Plot: " + response.data.Plot);
+        console.log("Actors: " + response.data.Actors + "\n");   
+    })
+    .catch(function(err){
+        console.log(err.message)
+    })
     
 }
 
