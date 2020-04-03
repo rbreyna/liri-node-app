@@ -29,11 +29,29 @@ function concert(band){
 
     axios.get("https://rest.bandsintown.com/artists/" + band + "/events?app_id=codingbootcamp")
     .then(function(response){
+        var nextEvent =
+            {
+                venue: "",
+                location: "",
+                date: "",
+                printInfo: function(){
+                    console.log("\n"+band +"'s next event info:\n");
+                    console.log("Venue: " + this.venue);
+                    console.log("Location: " + this.location);
+                    console.log("Date & Time: " + this.date);
+                }
+            };
+
+        nextEvent.venue = response.data[0].venue.name;
+        nextEvent.location = response.data[0].venue.city + ", " + response.data[0].venue.region + ", " + response.data[0].venue.country;
+
         var newDate = moment(response.data[0].datetime);
-   
-        console.log(response.data[0].datetime);
-        console.log("\n"+newDate.format("MM/DD/YYYY"))
-        console.log(newDate.format("h:mm A"))
+        
+        nextEvent.date = newDate.format("MM/DD/YYYY") + " at " + newDate.format("h:mm A");
+        
+        nextEvent.printInfo();
+
+
     })
     .catch(function(err){
         console.log(err.message)
@@ -55,9 +73,10 @@ function song(name){
 }
 
 function movie(title){
-    request("http://www.omdbapi.com/?i=tt3896198&apikey=222c6746&" + title, function (error, response, body) {
 
-    });
+    axios.get("http://www.omdbapi.com/?i=tt3896198&apikey=222c6746&" + title)
+    .then(function(response){})
+    .catch(function(err){})
     
 }
 
