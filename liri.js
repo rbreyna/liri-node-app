@@ -8,7 +8,7 @@ var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 
 var action = process.argv[2];
-var argument = process.argv[3];
+var argument = process.argv.slice(3).join(" ");
 
 switch(action){
     case "concert-this":
@@ -43,7 +43,18 @@ function concert(band){
             };
 
         nextEvent.venue = response.data[0].venue.name;
-        nextEvent.location = response.data[0].venue.city + ", " + response.data[0].venue.region + ", " + response.data[0].venue.country;
+
+        if(response.data[0].venue.city != ""){
+            nextEvent.location = response.data[0].venue.city + ", "
+        }
+
+        if(response.data[0].venue.region != ""){
+            nextEvent.location += response.data[0].venue.region + ", "
+        }
+        
+        if(response.data[0].venue.country != ""){
+            nextEvent.location += response.data[0].venue.country;
+        }
 
         var newDate = moment(response.data[0].datetime);
         
