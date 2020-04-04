@@ -98,7 +98,6 @@ function read(){
         if (error) {
           return console.log(error);
         }
-
         var array = data.split(",");
 
         action = array[0];
