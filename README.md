@@ -1,12 +1,15 @@
 # liri-node-app
 
 ### What is the liri-node-app doing??
+
 The liri-app that I've created is meant to give the user appropriate song, movie, or concert info based on the user's selection. Setting up this app will help save the user time reseaching the desired info. Instead of reading through multiple websites, this app provides a "One Stop Shop" for the user.
 
 ### How is the liri-node-app put together?
+
 The user input is grabbed and analyzed so that the appropriate actions can be performed. The user will provide one of 4 possible actions. A switch statment was used in the app construction and four different functions were created to handle each of four different possible user inputs. In one function, a file will be read to grab the necessary arguments to run the app. Within the other three functions, an API request will be made (based from the user's selection). A response object will be returned and with this object, I've pulled specfic properties to display info back to the user in the terminal.
 
 ### How does the app run?
+
 The user will run the app in the terminal using one of the four types of prompts.
 
 1. `node liri.js concert-this <artist/band name here>`
@@ -45,12 +48,12 @@ The app will take the user commands and perform the appropriate tasks. Here is w
 
 ### Technologies Used
 
-#### 1. API's
+###### 1. API's
 * Spotify
 * Bands In Town
 * IMDB
 
-#### 2. npm's
+###### 2. npm's
 * Axios
 * Spotify-node-api
 * fs
