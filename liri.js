@@ -81,7 +81,9 @@ function concert(band){
 
 //function to run Spotify call for song info
 function song(name){
-
+    if(name = ""){
+        name = "The Sign"
+;    }
     //request to Spotify API using the npm called node-spotify-api 
     spotify
         .search({type: 'track', query: name, limit: 1})
